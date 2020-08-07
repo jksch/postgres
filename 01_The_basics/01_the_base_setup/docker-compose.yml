@@ -1,0 +1,14 @@
+version: "3"
+services:
+  db: # DB setup
+    image: "postgres:12-alpine" # Use the postgres image from docker-hub.
+    environment:
+      - POSTGRES_USER=db
+      - POSTGRES_PASSWORD=db
+      - POSTGRES_DB=db
+    volumes:
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    # Comment this in if you want to persist the DB in the path ./db.
+    #- .db/:/var/lib/postgresql/data
+    ports: # Expose the DB port locally.
+      - "5432:5432"
